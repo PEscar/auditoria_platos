@@ -34,24 +34,14 @@ class UserController extends Controller
 
                 ->addColumn('nivel', function($row){
 
-                    return $row->hasRole('Admin') ? 'Admin' : ( $row->hasRole('Nivel1') ? 'Nivel 1' : 'Nivel 2' );
+                    return $row->hasRole('Admin') ? 'Si' : 'No';
                 })
 
                 ->rawColumns(['nivel'])
 
-                ->addColumn('sedes', function($row){
-
-                    return $row->sedes()->count();
-                })
-
-                ->rawColumns(['sedes'])
-
                 ->addColumn('action', function($row){
 
-                    $nivel = $row->hasRole('Admin') ? 'Admin' : ( $row->hasRole('Nivel1') ? 'Nivel 1' : 'Nivel 2' );
-                    $nivel2 = $row->hasRole('Admin') ? 'Admin' : ( $row->hasRole('Nivel1') ? 'Nivel1' : 'Nivel2' );
-
-                       $btn = '<a href="#" class="edit btn btn-primary btn-sm btn_view_user" data-toggle="modal" data-target="#view_user_modal" data-id="' . $row->id . '" data-name="' . $row->name . '" data-email="' . $row->email . '" data-nivel="' . $nivel . '" data-sedes="' . implode(',', $row->sedes->pluck('nombre')->toArray()) . '">View</a> <a href="#" class="edit btn btn-warning btn-sm btn_edit_user" data-url="' . route('api.users.update', ['id' => $row->id]) . '" data-name="' . $row->name . '" data-email="' . $row->email . '" data-nivel="' . $nivel2 . '" data-sedes="' . implode(',', $row->sedes->pluck('id')->toArray()) . '" data-toggle="modal" data-target="#update_user_modal" data-id="' . $row->id . '">Edit</a> <a href="#" class="edit btn btn-danger btn-sm btn_del_user" data-url="' . route('api.users.destroy', ['id' => $row->id]) . '" data-id="' . $row->id . '" data-toggle="modal" data-target="#delete_user_modal">Delete</a>'; 
+                       $btn = '<a href="#" class="edit btn btn-primary btn-sm btn_view_user" data-toggle="modal" data-target="#view_user_modal" data-id="' . $row->id . '" data-name="' . $row->name . '" data-email="' . $row->email . '" data-nivel="' . ($row->hasRole('Admin') ? 'Si' : 'No') . '">View</a> <a href="#" class="edit btn btn-warning btn-sm btn_edit_user" data-url="' . route('api.users.update', ['id' => $row->id]) . '" data-name="' . $row->name . '" data-email="' . $row->email . '" data-nivel="' . $row->hasRole('Admin') . '" data-toggle="modal" data-target="#update_user_modal" data-id="' . $row->id . '">Edit</a> <a href="#" class="edit btn btn-danger btn-sm btn_del_user" data-url="' . route('api.users.destroy', ['id' => $row->id]) . '" data-id="' . $row->id . '" data-toggle="modal" data-target="#delete_user_modal">Delete</a>'; 
 
                         return $btn;
                 })
@@ -90,8 +80,14 @@ class UserController extends Controller
 
         $user->update(['name' => $request->name, 'email' => $request->email]);
 
-        $user->setNivel($request->nivel);
-        $user->setSedes($request->sedes);
+        if ( $request->admin == 'true' && !$user->hasRole('Admin') )
+        {
+            $user->assignRole('Admin');
+        }
+        else if ( $request->admin == 'false' )
+        {
+            $user->removeRole('Admin');
+        }
 
         return Response::json(null, 204);
     }
@@ -151,8 +147,10 @@ class UserController extends Controller
         $user->api_token = Str::random(60);
         $user->save();
 
-        $user->setNivel($request->nivel);
-        $user->setSedes($request->sedes);
+        if ( $request->admin == 'true' )
+        {
+            $user->assignRole('Admin');
+        }
 
         return Response::json(null, 201);
     }

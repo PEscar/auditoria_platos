@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class ConfigRequest extends FormRequest
+class AuditoriaRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,8 +24,11 @@ class ConfigRequest extends FormRequest
     public function rules()
     {
         return [
-            'key' => 'required|in:VENCIMIENTO_GIFT_CARDS',
-            'value' => 'required',
+            'sede' => 'required|numeric',
+            'fecha' => 'required|date',
+            'turno' => 'required|in:1,2',
+            'sector' => 'required|numeric',
+            'comentario' => '',
         ];
     }
 }

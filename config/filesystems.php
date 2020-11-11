@@ -64,13 +64,6 @@ return [
             'url' => env('AWS_URL'),
             'endpoint' => env('AWS_ENDPOINT'),
         ],
-
-        'pdfs' => [
-            'driver' => 'local',
-            'root' => storage_path('app/pdfs'),
-            'url' => env('APP_URL').'/storage',
-            'visibility' => 'public',
-        ],
     ],
 
     /*

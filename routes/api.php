@@ -32,31 +32,10 @@ Route::middleware('auth:api')->group(function () {
         Route::post('/create', 'Api\UserController@store')->name('api.users.create');
     });
 
-    Route::prefix('giftcards')->group(function () {
-        Route::get('/minoristas', 'Api\GiftCardController@indexMinoristas')->name('api.giftcards.minoristas.index');
-        Route::get('/mayoristas', 'Api\GiftCardController@indexMayoristas')->name('api.giftcards.mayoristas.index');
-        Route::post('/asignar/{codigo?}', 'Api\GiftCardController@asignar')->name('api.giftcards.asignar');
-        Route::get('/validar/{codigo?}', 'Api\GiftCardController@validar')->name('api.giftcards.validar');
-        Route::post('/cancelar/{codigo?}', 'Api\GiftCardController@cancelar')->name('api.giftcards.cancel');
-    });
+    Route::prefix('auditorias')->group(function () {
 
-    Route::prefix('productos')->group(function () {
-        Route::get('/', 'Api\ProductoController@index')->name('api.productos.index');
-        Route::put('/update/{id}', 'Api\ProductoController@update')->name('api.productos.update');
-        Route::delete('/{id}', 'Api\ProductoController@destroy')->name('api.productos.destroy');
-        Route::post('/create', 'Api\ProductoController@store')->name('api.productos.create');
-    });
+        Route::get('/', 'Api\AuditoriaController@index')->name('api.auditorias.index');
+        Route::post('/', 'Api\AuditoriaController@store')->name('api.auditorias.create');
 
-    Route::prefix('empresas')->group(function () {
-        Route::get('/', 'Api\EmpresaController@index')->name('api.empresas.index');
-        Route::put('/update/{id}', 'Api\EmpresaController@update')->name('api.empresas.update');
-        Route::delete('/{id}', 'Api\EmpresaController@destroy')->name('api.empresas.destroy');
-        Route::post('/create', 'Api\EmpresaController@store')->name('api.empresas.create');
-    });
-
-    Route::prefix('ventas')->group(function () {
-        Route::get('/', 'Api\VentaController@index')->name('api.ventas.index');
-        Route::post('/', 'Api\VentaController@store')->name('api.ventas.create');
-        Route::put('/{id}', 'Api\VentaController@update')->name('api.ventas.update');
     });
 });

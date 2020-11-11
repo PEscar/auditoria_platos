@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddFechaPagoOnVentasTable extends Migration
+class CreateSectoresTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,10 @@ class AddFechaPagoOnVentasTable extends Migration
      */
     public function up()
     {
-        Schema::table('ventas', function($table) {
-            $table->dateTime('fecha_pago')->after('pagada')->nullable();
+        Schema::create('sectores', function (Blueprint $table) {
+            $table->id();
+            $table->string('nombre');
+            $table->timestamps();
         });
     }
 
@@ -25,8 +27,6 @@ class AddFechaPagoOnVentasTable extends Migration
      */
     public function down()
     {
-        Schema::table('ventas', function($table) {
-            $table->dropColumn('fecha_pago');
-        });
+        Schema::dropIfExists('sectores');
     }
 }

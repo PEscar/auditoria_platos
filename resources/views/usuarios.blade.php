@@ -19,8 +19,7 @@
                                 <th>ID</th>
                                 <th>Nombre</th>
                                 <th>Email</th>
-                                <th>Nivel</th>
-                                <th>Sedes</th>
+                                <th>Admin</th>
                                 <th>Acciones</th>
                             </tr>
                         </thead>
@@ -107,26 +106,7 @@
                         </div>
 
                         <div class="col-md-9">
-                            <select class="form-control" name="nivel" id="nivel">
-                                <option value="Admin">Admin</option>
-                                <option value="Nivel1">Nivel 1</option>
-                                <option value="Nivel2">Nivel 2</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <div class="form-group row">
-
-                        <div class="col-3 text-md-right">
-                            <label for="sedes" class="col-form-label">Sedes</label>
-                        </div>
-
-                        <div class="col-md-9">
-                            <select class="form-control" multiple="multiple" name="sedes[]" id="sedes">
-                                @foreach($sedes as $sede)
-                                    <option value="{{ $sede->id }}">{{ $sede->nombre }}</option>
-                                @endforeach
-                            </select>
+                            <input type="checkbox" name="nivel" id="nivel">
                         </div>
                     </div>
 
@@ -196,26 +176,7 @@
                         </div>
 
                         <div class="col-md-6">
-                            <select class="form-control" name="nivel" id="nivel">
-                                <option value="Admin">Admin</option>
-                                <option value="Nivel1">Nivel 1</option>
-                                <option value="Nivel2">Nivel 2</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <div class="form-group row">
-
-                        <div class="col-md-3 text-md-right">
-                            <label for="sedes" class="col-form-label">Sedes</label>
-                        </div>
-
-                        <div class="col-md-9">
-                            <select class="form-control" multiple="multiple" name="sedes[]" id="sedes">
-                                @foreach($sedes as $sede)
-                                    <option value="{{ $sede->id }}">{{ $sede->nombre }}</option>
-                                @endforeach
-                            </select>
+                            <input type="checkbox" name="nivel" id="nivel">
                         </div>
                     </div>
 
@@ -265,22 +226,11 @@
                 <div class="form-group row">
 
                     <div class="col-md-3 text-md-right">
-                        <label for="view_nivel" class="col-form-label">Nivel</label>
+                        <label for="view_nivel" class="col-form-label">Admin</label>
                     </div>
 
                     <div class="col-md-9">
                         <p id="view_nivel"></p>
-                    </div>
-                </div>
-
-                <div class="form-group row">
-
-                    <div class="col-md-3 text-md-right">
-                        <label for="sedes" class="col-form-label">Sedes</label>
-                    </div>
-
-                    <div class="col-md-9">
-                        <p id="view_sedes" ></p>
                     </div>
                 </div>
 
@@ -318,8 +268,6 @@
                     {data: 'email', name: 'email'},
 
                     {data: 'nivel', name: 'nivel'},
-
-                    {data: 'sedes', name: 'sedes'},
 
                     {data: 'action', name: 'action', orderable: false, searchable: false},
 
@@ -385,8 +333,7 @@
                 // Fill modal
                 $("#form_update_user #name").val($(e.relatedTarget).attr('data-name'));
                 $("#form_update_user #email").val($(e.relatedTarget).attr('data-email'));
-                $("#form_update_user #nivel").val($(e.relatedTarget).attr('data-nivel'));
-                $("#form_update_user #sedes").val( $(e.relatedTarget).attr('data-sedes').split(',') );
+                $("#form_update_user #nivel").prop('checked', $(e.relatedTarget).attr('data-nivel'));
             });
 
             $('#update_user_modal').on('click', '#confirm_update_user_btn', function(e) {
@@ -400,8 +347,7 @@
                         api_token: '{{ auth()->user()->api_token }}',
                         name: $('#update_user_modal #name').val(),
                         email: $('#update_user_modal #email').val(),
-                        nivel: $('#update_user_modal #nivel').val(),
-                        sedes: $('#update_user_modal #sedes').val(),
+                        admin: $('#update_user_modal #nivel').prop('checked') ? true : false,
                     },
                 })
                 .done(function() {
@@ -432,8 +378,7 @@
                         api_token: '{{ auth()->user()->api_token }}',
                         name: $('#create_user_modal #name').val(),
                         email: $('#create_user_modal #email').val(),
-                        nivel: $('#create_user_modal #nivel').val(),
-                        sedes: $('#create_user_modal #sedes').val(),
+                        admin: $('#update_user_modal #nivel').prop('checked'),
                     },
                 })
                 .done(function() {
@@ -456,14 +401,6 @@
                 $("#view_name").html($(e.relatedTarget).attr('data-name'));
                 $("#view_email").html($(e.relatedTarget).attr('data-email'));
                 $("#view_nivel").html($(e.relatedTarget).attr('data-nivel'));
-
-                var sedes = '';
-                var sedes_array = $(e.relatedTarget).attr('data-sedes').split(',');
-                for ( let key in sedes_array )
-                {
-                    sedes += sedes_array[key] + '<br>';
-                }
-                $("#view_sedes").html(sedes);
             });
         });
 

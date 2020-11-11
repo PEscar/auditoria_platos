@@ -30,35 +30,9 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
-                        <li class="nav-item dropdown navbar-brand">
-                            <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                Gift Cards <span class="caret"></span>
-                            </a>
-
-                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="{{ route('giftcards.show') }}">Validar</a>
-                                @if ( auth()->user() && ( auth()->user()->hasRole('Admin') || auth()->user()->hasRole('Nivel1') ))
-                                <a class="dropdown-item" href="{{ route('giftcards.index.minoristas') }}">Minoristas</a>
-                                <a class="dropdown-item" href="{{ route('giftcards.index.mayoristas') }}">Mayoristas</a>
-                                @endif
-                            </div>
-                        </li>
                         @if ( auth()->user()->hasRole('Admin'))
 
-                        <li class="nav-item dropdown navbar-brand">
-                            <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                ABM <span class="caret"></span>
-                            </a>
-
-                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="{{ route('empresas.index') }}">Empresas</a>
-                                <a class="dropdown-item" href="{{ route('productos.index') }}">Productos</a>
-                                <a class="dropdown-item" href="{{ route('usuarios.index') }}">Usuarios</a>
-                                <a class="dropdown-item" href="{{ route('ventas.index') }}">Ventas</a>
-                            </div>
-                        </li>
-
-                        <li class="nav-item navbar-brand"><a class="nav-link" href="{{ route('configuracion.update.show') }}">Configuración</a></li>
+                        <li class="nav-item navbar-brand"><a class="dropdown-item" href="{{ route('usuarios.index') }}">Usuarios</a></li>
                         @endif
                     </ul>
 
