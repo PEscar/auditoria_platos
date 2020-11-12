@@ -102,7 +102,7 @@
                     <div class="form-group row">
 
                         <div class="col-3 text-md-right">
-                            <label for="nivel" class="col-form-label">Permiso</label>
+                            <label for="nivel" class="col-form-label">Admin</label>
                         </div>
 
                         <div class="col-md-9">
@@ -172,7 +172,7 @@
                     <div class="form-group row">
 
                         <div class="col-md-3 text-md-right">
-                            <label for="nivel" class="col-form-label">Permiso</label>
+                            <label for="nivel" class="col-form-label">Admin</label>
                         </div>
 
                         <div class="col-md-6">

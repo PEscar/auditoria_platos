@@ -51,13 +51,13 @@
                     {
                         extend: 'excel',
                         pageSize: 'LEGAL',
-                        title: "{{ date('Y-m-d') }}" + ' - Gift Cards',
+                        title: "{{ date('Y-m-d') }}" + ' - Auditorías',
                     },
                     {
                         extend: 'pdfHtml5',
                         orientation: 'landscape',
                         pageSize: 'LEGAL',
-                        title: "{{ date('Y-m-d') }}" + ' - Gift Cards',
+                        title: "{{ date('Y-m-d') }}" + ' - Auditorías',
                     }
                 ],
 

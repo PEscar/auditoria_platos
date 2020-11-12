@@ -38,7 +38,7 @@ class AuditoriaController extends Controller
 
                 ->addColumn('turno', function($row){
 
-                    return $row->turno == 1 ? 'Mañana' : 'Tarde';
+                    return $row->turno;
                 })
 
                 ->rawColumns(['turno'])

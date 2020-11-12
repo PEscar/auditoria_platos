@@ -47,8 +47,8 @@
                                 <div class="col-9">
                                     <select class="form-control" v-bind:class="{ 'is-valid': turno, 'is-invalid': !turno }" v-model="turno" id="turno">
                                         <option selected value="null" disabled>Seleccionar Turno</option>
-                                        <option value="1">Mañana</option>
-                                        <option value="2">Tarde</option>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
                                     </select>
                                 </div>
                             </div>
@@ -72,7 +72,7 @@
                                 </div>
 
                                 <div class="col-9">
-                                    <textarea class="form-control" v-model="comentario" rows="2"></textarea>
+                                    <textarea class="form-control" v-bind:class="{ 'is-valid': comentario, 'is-invalid': !comentario }" v-model="comentario" rows="2"></textarea>
                                 </div>
                             </div>
 
@@ -154,7 +154,7 @@
         computed: {
 
             validateNuevaAuditoriaForm: function() {
-                return this.sede && this.fecha && this.turno && this.sector && 1
+                return this.sede && this.fecha && this.turno && this.sector && this.comentario && 1
             },
         },
     }
