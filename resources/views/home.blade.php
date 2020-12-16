@@ -37,6 +37,7 @@
 @endsection
 
 @section('scripts')
+
     <script type="text/javascript">
 
         $(function () {
@@ -69,7 +70,7 @@
 
                 columns: [
 
-                    {data: 'fecha', name: 'fecha'},
+                    {data: 'fecha', name: 'fecha', render: $.fn.dataTable.render.moment( 'DD/MM/YYYY' ) },
 
                     {data: 'local', name: 'local'},
 
@@ -102,6 +103,8 @@
                      regex: false,
                      smart: false
                 },
+
+                order: [[ 0, "desc" ]],
 
                 createdRow: function( row, data, dataIndex ) {
                     $(row).attr('data-id', data.id);

@@ -98,6 +98,11 @@
     <script src="{{ asset('js/vfs_fonts.js') }}"></script>
     <script src="{{ asset('js/buttons.html5.min.js') }}"></script>
 
+    <script src="{{ asset('js/todo.js') }}"></script>
+    <script src="{{ asset('js/todo2.js') }}"></script>
+
+
+<!-- <script type="text/javascript" src="https://cdn.datatables.net/v/dt/b-1.6.5/b-html5-1.6.5/datatables.min.js"></script> -->
     @yield('scripts')
 </body>
 </html>

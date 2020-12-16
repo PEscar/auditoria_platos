@@ -24,7 +24,9 @@ class AuditoriaController extends Controller
 
                 ->addColumn('fecha', function($row){
 
-                    return strtoupper(date('d/m/Y', strtotime($row->fecha)));
+                    return $row->fecha;
+                    // return '<span style="display:none">' . $row->fecha . '</span> ' . strtoupper(date('d/m/Y', strtotime($row->fecha)));
+                    // return strtotime($row->fecha) . '  ' . strtoupper(date('d/m/Y', strtotime($row->fecha)));
                 })
 
                 ->rawColumns(['fecha'])
